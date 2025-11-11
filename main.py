@@ -1,5 +1,21 @@
+"""
+FastMCP Playground - Entry Point
+
+This is the main entry point for the FastMCP playground server.
+"""
+
+from app.server import create_server
+from app.config.settings import settings
+
+
 def main():
-    print("Hello from fastmcp-playground!")
+    """Run the FastMCP server."""
+    mcp = create_server()
+    mcp.run(
+        transport="http",
+        port=settings.server_port,
+        host=settings.server_host
+    )
 
 
 if __name__ == "__main__":
