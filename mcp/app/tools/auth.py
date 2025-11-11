@@ -20,9 +20,9 @@ class AuthToolProvider(BaseToolProvider):
         super().__init__(mcp)
     
     def register_tools(self):
-        self.mcp.tool(self.get_user_info)
-        self.mcp.tool(self.check_authentication)
-        self.mcp.tool(self.get_token_claims)
+        self.mcp.tool(tags=["role:all"])(self.get_user_info)
+        self.mcp.tool(tags=["role:all"])(self.check_authentication)
+        self.mcp.tool(tags=["role:all"])(self.get_token_claims)
     
     def _get_token(self) -> AccessToken | None:
         """

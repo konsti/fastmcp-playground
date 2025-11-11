@@ -15,9 +15,9 @@ class BasicToolProvider(BaseToolProvider):
         super().__init__(mcp)
     
     def register_tools(self):
-        self.mcp.tool(self.greet)
-        self.mcp.tool(self.echo)
-        self.mcp.tool(self.add_numbers)
+        self.mcp.tool(tags=["role:all"])(self.greet)
+        self.mcp.tool(tags=["role:all"])(self.echo)
+        self.mcp.tool(tags=["role:all"])(self.add_numbers)
     
     def greet(self, name: str) -> str:
         """

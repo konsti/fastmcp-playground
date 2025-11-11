@@ -14,6 +14,8 @@ def register_tools(mcp: FastMCP) -> None:
     """
     from app.tools.basic import BasicToolProvider
     from app.tools.auth import AuthToolProvider
+    from app.tools.portfolio import PortfolioToolProvider
 
     BasicToolProvider(mcp)
     AuthToolProvider(mcp)
+    PortfolioToolProvider(mcp)
