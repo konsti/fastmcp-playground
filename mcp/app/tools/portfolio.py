@@ -12,13 +12,13 @@ class PortfolioToolProvider(BaseToolProvider):
     """
     Provider for portfolio-related tools.
     """
-    
+
     def __init__(self, mcp: FastMCP):
         super().__init__(mcp)
-    
+
     def register_tools(self):
         self.mcp.tool(tags=["role:portfolio_access"])(self.portfolio_insights)
-    
+
     def portfolio_insights(self) -> dict:
         """
         Get insights about the user's portfolio.
@@ -47,5 +47,3 @@ class PortfolioToolProvider(BaseToolProvider):
                 "cash": 10.0,
             },
         }
-
-

@@ -10,7 +10,7 @@ from app.middleware import AuthorizationMiddleware
 def create_server() -> FastMCP:
     """
     Create and configure the FastMCP server instance.
-    
+
     Returns:
         FastMCP: Configured FastMCP server instance
     """
@@ -20,13 +20,13 @@ def create_server() -> FastMCP:
         auth=auth_provider,
         include_fastmcp_meta=False,
     )
-    
+
     mcp.add_middleware(AuthorizationMiddleware())
-    
+
     from app.tools import register_tools
     from app.routes import register_routes
-    
+
     register_tools(mcp)
     register_routes(mcp)
-    
+
     return mcp

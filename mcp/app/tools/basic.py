@@ -13,44 +13,44 @@ class BasicToolProvider(BaseToolProvider):
 
     def __init__(self, mcp: FastMCP):
         super().__init__(mcp)
-    
+
     def register_tools(self):
         self.mcp.tool(tags=["role:all"])(self.greet)
         self.mcp.tool(tags=["role:all"])(self.echo)
         self.mcp.tool(tags=["role:all"])(self.add_numbers)
-    
+
     def greet(self, name: str) -> str:
         """
         Greet a user by name.
-        
+
         Args:
             name: The name of the person to greet
-            
+
         Returns:
             A greeting message
         """
         return f"Hello, {name}!"
-    
+
     def echo(self, message: str) -> str:
         """
         Echo back a message.
-        
+
         Args:
             message: The message to echo
-            
+
         Returns:
             The same message
         """
         return message
-    
+
     def add_numbers(self, a: float, b: float) -> float:
         """
         Add two numbers together.
-        
+
         Args:
             a: First number
             b: Second number
-            
+
         Returns:
             Sum of the two numbers
         """

@@ -35,14 +35,14 @@ def check_jwt_bearer(authorization: str | None) -> None:
             detail="Missing Authorization header",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     if not authorization.startswith("Bearer "):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid authentication scheme. Expected 'Bearer'",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     token = authorization[7:].strip()
     if not token:
         raise HTTPException(
@@ -50,7 +50,7 @@ def check_jwt_bearer(authorization: str | None) -> None:
             detail="Missing JWT token",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     # Demo: We don't validate the token, just check it exists
 
 
@@ -63,52 +63,47 @@ async def root():
         "description": "Serves portfolio data as CSV",
         "endpoints": {
             "/portfolio/csv": "Get portfolio data as CSV (requires JWT Bearer token)"
-        }
+        },
     }
 
 
 @app.get("/portfolio/csv")
-async def get_portfolio_csv(
-    authorization: Annotated[str | None, Header()] = None
-):
+async def get_portfolio_csv(authorization: Annotated[str | None, Header()] = None):
     """
     Get portfolio data as CSV.
-    
+
     Requires a JWT Bearer token in the Authorization header.
     Token is not validated (demo only).
     """
     # Check for JWT Bearer token (demo - no validation)
     check_jwt_bearer(authorization)
-    
+
     # Load portfolio data
     data = load_portfolio_data()
-    
+
     if not data:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="No portfolio data available"
+            status_code=status.HTTP_404_NOT_FOUND, detail="No portfolio data available"
         )
-    
+
     # Create CSV in memory
     output = io.StringIO()
-    
+
     # Get all field names from the first record
     fieldnames = list(data[0].keys())
-    
+
     writer = csv.DictWriter(output, fieldnames=fieldnames)
     writer.writeheader()
     writer.writerows(data)
-    
+
     # Get CSV content
     csv_content = output.getvalue()
-    
+
     # Return as streaming response
     return StreamingResponse(
         iter([csv_content]),
         media_type="text/csv",
-        headers={
-            "Content-Disposition": "attachment; filename=portfolio-data.csv"
-        }
+        headers={"Content-Disposition": "attachment; filename=portfolio-data.csv"},
     )
 
 
@@ -116,4 +111,3 @@ async def get_portfolio_csv(
 async def health_check():
     """Health check endpoint."""
     return {"status": "healthy"}
-
