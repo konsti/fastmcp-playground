@@ -19,3 +19,5 @@ portfolio-api/uv.lock
 
 # Environment variables
 .env
+
+portfolio-api/data/sample-data.json
