@@ -11,6 +11,11 @@ wheels/
 
 # Virtual environments
 .venv
+mcp/.venv
+portfolio-api/.venv
+uv.lock
+mcp/uv.lock
+portfolio-api/uv.lock
 
 # Environment variables
 .env

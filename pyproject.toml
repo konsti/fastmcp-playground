@@ -1,0 +1,12 @@
+[project]
+name = "fastmcp-playground-workspace"
+version = "0.1.0"
+description = "Monorepo for FastMCP server and Portfolio API"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv.workspace]
+members = ["mcp", "portfolio-api"]
+
+[tool.uv.sources]
+

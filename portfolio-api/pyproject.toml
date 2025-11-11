@@ -1,0 +1,11 @@
+[project]
+name = "portfolio-api"
+version = "0.1.0"
+description = "A simple FastAPI service to serve portfolio data as CSV"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+]
+
