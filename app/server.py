@@ -14,9 +14,16 @@ def create_server() -> FastMCP:
         FastMCP: Configured FastMCP server instance
     """
     auth_provider = setup_auth()
-    mcp = FastMCP("FastMCP Playground", auth=auth_provider)
+    mcp = FastMCP(
+        name="FastMCP Playground",
+        auth=auth_provider,
+        include_fastmcp_meta=False,
+    )
     
     from app.tools import register_tools
+    from app.routes import register_routes
+    
     register_tools(mcp)
+    register_routes(mcp)
     
     return mcp
