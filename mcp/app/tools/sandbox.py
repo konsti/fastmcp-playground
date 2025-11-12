@@ -4,9 +4,12 @@ Sandbox tool for executing Python code in an isolated environment.
 This module provides tools for securely running Python code using llm-sandbox.
 """
 
+from typing import Any, override
 from fastmcp import FastMCP
-from llm_sandbox import SandboxBackend
+from llm_sandbox import SandboxBackend  # pyright: ignore[reportMissingTypeStubs]
+from mcp.types import ToolAnnotations
 from app.tools.base import BaseToolProvider
+from app.icons import code
 
 
 class SandboxToolProvider(BaseToolProvider):
@@ -17,10 +20,27 @@ class SandboxToolProvider(BaseToolProvider):
     def __init__(self, mcp: FastMCP):
         super().__init__(mcp)
 
+    @override
     def register_tools(self):
-        self.mcp.tool(tags=["role:all"])(self.run_python_code)
+        self.mcp.tool(
+            name="run_python_code",
+            title="Run Python Code",
+            description="Run Python code in a secure sandbox environment.",
+            tags={"role:all"},
+            icons=[code],
+            annotations=ToolAnnotations(
+                title="Run Python Code",
+                readOnlyHint=False,
+                destructiveHint=False,
+                idempotentHint=True,
+                openWorldHint=True,
+            ),
+            meta={
+                "unique.app/system-prompt": "Use this tool to run Python code in a secure sandbox environment.",
+            },
+        )(self.run_python_code)
 
-    def run_python_code(self, code: str, timeout: int = 30) -> dict:
+    def run_python_code(self, code: str, timeout: int = 30) -> dict[str, Any]:  # pyright: ignore[reportExplicitAny]
         """
         Execute Python code in a secure sandbox environment.
 
@@ -36,13 +56,13 @@ class SandboxToolProvider(BaseToolProvider):
             - success: Boolean indicating if execution was successful
         """
         try:
-            from llm_sandbox import SandboxSession
+            from llm_sandbox import SandboxSession  # pyright: ignore[reportMissingTypeStubs]
 
             with SandboxSession(
                 lang="python",
                 backend=SandboxBackend.DOCKER,
             ) as session:
-                result = session.run(code, timeout=timeout)
+                result = session.run(code, timeout=timeout)  # pyright: ignore[reportUnknownMemberType]
 
                 return {
                     "stdout": result.stdout or "",
@@ -58,4 +78,3 @@ class SandboxToolProvider(BaseToolProvider):
                 "exit_code": 1,
                 "success": False,
             }
-

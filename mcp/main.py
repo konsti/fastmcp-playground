@@ -11,7 +11,7 @@ from app.config.settings import settings
 def main():
     """Run the FastMCP server."""
     mcp = create_server()
-    mcp.run(transport="http", port=settings.server_port, host=settings.server_host)
+    mcp.run(transport="http", port=settings.port, host=settings.host)
 
 
 if __name__ == "__main__":

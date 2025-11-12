@@ -1,0 +1,7 @@
+{
+  "cursorpyright.analysis.diagnosticSeverityOverrides": {
+    "reportUnannotatedClassAttribute": "none",
+    "reportImplicitRelativeImport": "none",
+    "reportUnusedCallResult": "none"
+  }
+}

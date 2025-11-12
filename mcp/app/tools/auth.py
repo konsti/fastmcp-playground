@@ -2,10 +2,12 @@
 Authentication-related demo tools.
 """
 
+from typing import Any, override
 from fastmcp import FastMCP
-from fastmcp.server.auth import AccessToken
+from mcp.types import ToolAnnotations
 from fastmcp.server.dependencies import get_access_token
 from app.tools.base import BaseToolProvider
+from app.icons import key_square
 
 
 class AuthToolProvider(BaseToolProvider):
@@ -19,68 +21,34 @@ class AuthToolProvider(BaseToolProvider):
     def __init__(self, mcp: FastMCP):
         super().__init__(mcp)
 
+    @override
     def register_tools(self):
-        self.mcp.tool(tags=["role:all"])(self.get_user_info)
-        self.mcp.tool(tags=["role:all"])(self.check_authentication)
-        self.mcp.tool(tags=["role:all"])(self.get_token_claims)
+        self.mcp.tool(
+            name="get_token_claims",
+            title="Get Token Claims",
+            description="Get the JWT claims from the current access token.",
+            tags={"role:all"},
+            icons=[key_square],
+            annotations=ToolAnnotations(
+                title="Get Token Claims",
+                readOnlyHint=True,
+                destructiveHint=False,
+                idempotentHint=True,
+                openWorldHint=False,
+            ),
+            meta={
+                "unique.app/system-prompt": "Use this tool to get the JWT claims from the current access token, e.g. to determine the groups a user is a member of.",
+            },
+        )(self.get_token_claims)
 
-    def _get_token(self) -> AccessToken | None:
-        """
-        Internal helper to get the current Keycloak access token.
-
-        Returns:
-            The current Keycloak access token or None if not authenticated
-        """
-        return get_access_token()
-
-    def get_user_info(self) -> dict:
-        """
-        Get information about the authenticated user.
-
-        Returns:
-            Dictionary containing user authentication information including:
-            - authenticated: Whether the user is authenticated
-            - client_id: The OAuth client ID (if authenticated)
-            - scopes: List of granted scopes (if authenticated)
-            - expires_at: Token expiration time (if authenticated)
-            - token_claims: JWT claims (if authenticated)
-        """
-        token = self._get_token()
-
-        if token is None:
-            return {"authenticated": False}
-
-        return {
-            "authenticated": True,
-            "client_id": token.client_id,
-            "scopes": token.scopes,
-            "expires_at": token.expires_at,
-            "token_claims": token.claims,
-        }
-
-    def check_authentication(self) -> dict:
-        """
-        Check if the current request is authenticated.
-
-        Returns:
-            Dictionary with authentication status
-        """
-        token = self._get_token()
-        return {
-            "authenticated": token is not None,
-            "message": "User is authenticated"
-            if token
-            else "User is not authenticated",
-        }
-
-    def get_token_claims(self) -> dict:
+    def get_token_claims(self) -> dict[str, Any]:  # pyright: ignore[reportExplicitAny]
         """
         Get the JWT claims from the current access token.
 
         Returns:
             Dictionary containing JWT claims or error message
         """
-        token = self._get_token()
+        token = get_access_token()
 
         if token is None:
             return {"error": "Not authenticated"}

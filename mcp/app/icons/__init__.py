@@ -1,0 +1,30 @@
+"""
+Icon definitions for MCP tools, resources and other components.
+
+Icons are Lucide icons, see https://lucide.dev/icons/ for all available icons.
+To add an icon, copy the data url and add it to the Icon constructor.
+"""
+
+from mcp.types import Icon
+
+code = Icon(
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNvZGUtaWNvbiBsdWNpZGUtY29kZSI+PHBhdGggZD0ibTE2IDE4IDYtNi02LTYiLz48cGF0aCBkPSJtOCA2LTYgNiA2IDYiLz48L3N2Zz4=",
+    mimeType="image/svg+xml",
+)
+
+key_square = Icon(
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWtleS1zcXVhcmUtaWNvbiBsdWNpZGUta2V5LXNxdWFyZSI+PHBhdGggZD0iTTEyLjQgMi43YTIuNSAyLjUgMCAwIDEgMy40IDBsNS41IDUuNWEyLjUgMi41IDAgMCAxIDAgMy40bC0zLjcgMy43YTIuNSAyLjUgMCAwIDEtMy40IDBMOC43IDkuOGEyLjUgMi41IDAgMCAxIDAtMy40eiIvPjxwYXRoIGQ9Im0xNCA3IDMgMyIvPjxwYXRoIGQ9Im05LjQgMTAuNi02LjgxNCA2LjgxNEEyIDIgMCAwIDAgMiAxOC44MjhWMjFhMSAxIDAgMCAwIDEgMWgzYTEgMSAwIDAgMCAxLTF2LTFhMSAxIDAgMCAxIDEtMWgxYTEgMSAwIDAgMCAxLTF2LTFhMSAxIDAgMCAxIDEtMWguMTcyYTIgMiAwIDAgMCAxLjQxNC0uNTg2bC44MTQtLjgxNCIvPjwvc3ZnPg==",
+    mimeType="image/svg+xml",
+)
+
+notebook_tabs = Icon(
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW5vdGVib29rLXRhYnMtaWNvbiBsdWNpZGUtbm90ZWJvb2stdGFicyI+PHBhdGggZD0iTTIgNmg0Ii8+PHBhdGggZD0iTTIgMTBoNCIvPjxwYXRoIGQ9Ik0yIDE0aDQiLz48cGF0aCBkPSJNMiAxOGg0Ii8+PHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjIwIiB4PSI0IiB5PSIyIiByeD0iMiIvPjxwYXRoIGQ9Ik0xNSAydjIwIi8+PHBhdGggZD0iTTE1IDdoNSIvPjxwYXRoIGQ9Ik0xNSAxMmg1Ii8+PHBhdGggZD0iTTE1IDE3aDUiLz48L3N2Zz4=",
+    mimeType="image/svg+xml",
+)
+
+__all__ = [
+    "code",
+    "key_square",
+    "notebook_tabs",
+]
+
