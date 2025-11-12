@@ -64,7 +64,7 @@ class PortfolioResourceProvider:
 
         async with httpx.AsyncClient() as client:
             response = await client.get(
-                f"{settings.portfolio_api_url}/portfolio/csv",
+                f"{settings.portfolio_api_url}portfolio/csv",
                 headers={"Authorization": f"Bearer {access_token}"},
                 timeout=10.0,
             )
